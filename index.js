@@ -37,8 +37,22 @@ function formatNumberspace(num) {
     return num;
 }
 
+const genshop = document.querySelector('.generators')
+
+setInterval(() => {
+    console.log(genshouldstay)
+},500)
 
 const tuto = document.querySelector('h2');
+let genshouldstay = localStorage.getItem('stay') ? localStorage.getItem('stay') : false
+let upgradeshouldstay = localStorage.getItem('upgrade') ? localStorage.getItem('upgrade') : false
+let gen1shouldstay = localStorage.getItem('gen1stay') ? localStorage.getItem('gen1stay') : false
+let gen2shouldstay = localStorage.getItem('gen2stay') ? localStorage.getItem('gen2stay') : false
+let gen3shouldstay = localStorage.getItem('gen3stay') ? localStorage.getItem('gen3stay') : false
+let gen4shouldstay = localStorage.getItem('gen4stay') ? localStorage.getItem('gen4stay') : false
+let gen5shouldstay = localStorage.getItem('gen5stay') ? localStorage.getItem('gen5stay') : false
+let gen6shouldstay = localStorage.getItem('gen6stay') ? localStorage.getItem('gen6stay') : false
+
 
 const alpha = document.querySelector('h1');
 let alphaclicked = false
@@ -116,13 +130,12 @@ let hue = ''
 // let priceGen5 = 1000000000
 // let priceGen6 = 100000000000
 // Prix des générateurs
-let priceGen1 = localStorage.getItem('gen1price') ? localStorage.getItem('gen1price') : 2
-let priceGen2 = localStorage.getItem('gen2price') ? localStorage.getItem('gen2price') : 5
-let priceGen3 = localStorage.getItem('gen3price') ? localStorage.getItem('gen3price') : 10
-let priceGen4 = localStorage.getItem('gen4price') ? localStorage.getItem('gen4price') : 100
-let priceGen5 = localStorage.getItem('gen5price') ? localStorage.getItem('gen5price') : 1000
-let priceGen6 = localStorage.getItem('gen6price') ? localStorage.getItem('gen6price') : 10000
-
+let priceGen1 = localStorage.getItem('gen1price') ? localStorage.getItem('gen1price') : 10
+let priceGen2 = localStorage.getItem('gen2price') ? localStorage.getItem('gen2price') : 50
+let priceGen3 = localStorage.getItem('gen3price') ? localStorage.getItem('gen3price') : 100
+let priceGen4 = localStorage.getItem('gen4price') ? localStorage.getItem('gen4price') : 1000
+let priceGen5 = localStorage.getItem('gen5price') ? localStorage.getItem('gen5price') : 10000
+let priceGen6 = localStorage.getItem('gen6price') ? localStorage.getItem('gen6price') : 100000
 //prix du shop
 // let genmult1price = 50000000
 // let genmult2price = 750000000
@@ -131,12 +144,12 @@ let priceGen6 = localStorage.getItem('gen6price') ? localStorage.getItem('gen6pr
 // let genmult5price = 10000000000
 // let genmult6price = 100000000000
 // let clickmultprice = 10000000
-let genmult1price = 50000000
-let genmult2price = 750000000
-let genmult3price = 1000000000
-let genmult4price = 1500000000
-let genmult5price = 10000000000
-let genmult6price = 100000000000
+let genmult1price = localStorage.getItem('genmult1price') ? localStorage.getItem('genmult1price') : 500
+let genmult2price = localStorage.getItem('genmult2price') ? localStorage.getItem('genmult2price') : 7500
+let genmult3price = localStorage.getItem('genmult3price') ? localStorage.getItem('genmult3price') : 10000
+let genmult4price = localStorage.getItem('genmult4price') ? localStorage.getItem('genmult4price') : 150000
+let genmult5price = localStorage.getItem('genmult5price') ? localStorage.getItem('genmult5price') : 1000000
+let genmult6price = localStorage.getItem('genmult6price') ? localStorage.getItem('genmult6price') : 10000000
 // let clickmultprice = 10000000
 
 //les switches
@@ -182,6 +195,7 @@ head.style.transform='translate(-50%,-50%)'
 alpha.addEventListener('click', () => {
 
     alphaclicked = true
+    genstayed()
 
     alphaSwitch.style.display='inline-flex'
     
@@ -219,7 +233,6 @@ alpha.addEventListener('click', () => {
     
     
     
-    const genshop = document.querySelector('.generators')
     setInterval(() => {
 
         
@@ -238,37 +251,49 @@ alpha.addEventListener('click', () => {
         // clickmult.textContent = `Upgrade clicker multiplier (${formatNumber(clickmultprice)} ${unit})`
         
         if (count >= priceGen1) {
-            gen1.style.opacity = '1';
-            gen1.style.display = 'block';
-            genshop.style.opacity = '1'
+            genshouldstay = true
+            gen1shouldstay = true
+            localStorage.setItem('gen1stay', gen1shouldstay)
+            localStorage.setItem('stay', genshouldstay)
         }
+        
         if (count >= priceGen2) {
-            gen2.style.opacity = '1';
-            gen2.style.display = 'block';
+            gen2shouldstay = true
+            localStorage.setItem('gen2stay', gen2shouldstay)
+
+
             // const elementbtn = document.querySelector('.newelement')
         }
         
         if (count >= priceGen3) {
-            gen3.style.opacity = '1';
-            gen3.style.display = 'block';
-            
+            gen3shouldstay = true
+            localStorage.setItem('gen3stay', gen3shouldstay)
+
+
         }
         if (count >= priceGen4) {
             gen4.style.opacity = '1';
             gen4.style.display = 'block';
+            gen4shouldstay = true
+            localStorage.setItem('gen4stay', gen4shouldstay)
+
             
         }
         if (count >= priceGen5) {
-            gen5.style.opacity = '1';
-            gen5.style.display = 'block';
+            gen5shouldstay = true
+            localStorage.setItem('gen5stay', gen5shouldstay)
+
             
         }
         if (count >= priceGen6) {
-            gen6.style.opacity = '1';
-            gen6.style.display = 'block';
+            gen6shouldstay = true
+            localStorage.setItem('gen6stay', gen6shouldstay)
+
             
         }
         if (count >= genmult1price) {
+            upgradeshouldstay = true
+            localStorage.setItem('upgrade', upgradeshouldstay)
             shop.style.opacity = '1'
             shop.style.display = 'flex'
             genmult1.style.display = 'block'
@@ -317,6 +342,7 @@ alpha.addEventListener('click', () => {
         if (gen6Count >= 1) {
             gen6infos.style.opacity ='1';
         }
+
         
         localStorage.setItem('count', count)
         localStorage.setItem('gen1count', gen1Count)
@@ -364,90 +390,109 @@ const gen5infos = document.querySelector('.gen5count')
 const gen6infos = document.querySelector('.gen6count')
 
 //event du shop //
-let genmulted1 = 1
+let genmulted1 = localStorage.getItem('genmult1') ? localStorage.getItem('genmult1') : 1
 genmult1.addEventListener('click', () => {
     if (count >= genmult1price) {
+        localStorage.setItem('genmult1price', genmult1price)
         count -= genmult1price;
         genmult1price *= 1.75; // Augmente le prix pour le prochain achat
         genmult1price = Math.round(genmult1price);
+        localStorage.setItem('genmult1price', genmult1price)
         
         genmulted1 *= 2;
+        localStorage.setItem('genmult1', genmulted1)
         
     } else {
         displayError();
     }
 })
 
-let genmulted2 = 1;
+let genmulted2 = localStorage.getItem('genmult2') ? localStorage.getItem('genmult2') : 1;
 
 genmult2.addEventListener('click', () => {
     if (count >= genmult2price) {
+        localStorage.setItem('genmult2price', genmult2price)
         count -= genmult2price;
         genmult2price *= 2; // Augmente le prix pour le prochain achat
         genmult2price = Math.round(genmult2price);
+        localStorage.setItem('genmult2price', genmult2price)
         
         genmulted2 *= 2;
+        localStorage.setItem('genmult2', genmulted2)
         
     } else {
         displayError();
     }
 });
 
-let genmulted3 = 1;
+let genmulted3 = localStorage.getItem('genmult2') ? localStorage.getItem('genmult2') : 1;
 genmult3.addEventListener('click', () => {
     if (count >= genmult3price) {
+        localStorage.setItem('genmult3price', genmult3price)
         count -= genmult3price;
         genmult3price *= 2.5; // Augmente le prix pour le prochain achat
         genmult3price = Math.round(genmult3price);
+        localStorage.setItem('genmult3price', genmult3price)
         
         genmulted3 *= 2;
+        localStorage.setItem('genmult3', genmulted3)
         
     } else {
         displayError();
     }
 });
 
-let genmulted4 = 1;
+let genmulted4 = localStorage.getItem('genmult4') ? localStorage.getItem('genmult4') : 1;
 genmult4.addEventListener('click', () => {
     if (count >= genmult4price) {
+        localStorage.setItem('genmult4price', genmult4price)
         count -= genmult4price;
         genmult4price *= 3; // Augmente le prix pour le prochain achat
         genmult4price = Math.round(genmult4price);
+        localStorage.setItem('genmult4price', genmult4price)
         
         genmulted4 *= 2;
+        localStorage.setItem('genmult4', genmulted4)
         
     } else {
         displayError();
     }
 });
 
-let genmulted5 = 1;
+let genmulted5 = localStorage.getItem('genmult5') ? localStorage.getItem('genmult5') : 1;
 genmult5.addEventListener('click', () => {
     if (count >= genmult5price) {
+        localStorage.setItem('genmult5price', genmult5price)
         count -= genmult5price;
         genmult5price *= 3.5; // Augmente le prix pour le prochain achat
         genmult5price = Math.round(genmult5price);
+        localStorage.setItem('genmult5price', genmult5price)
         
         genmulted5 *= 2;
+        localStorage.setItem('genmult5', genmulted5)
         
     } else {
         displayError();
     }
 });
 
-let genmulted6 = 1;
+let genmulted6 = localStorage.getItem('genmult2') ? localStorage.getItem('genmult2') : 1;
 genmult6.addEventListener('click', () => {
+    localStorage.setItem('genmult6price', genmult6price)
     if (count >= genmult6price) {
         count -= genmult6price;
         genmult6price *= 4; // Augmente le prix pour le prochain achat
         genmult6price = Math.round(genmult6price);
+        localStorage.setItem('genmult6price', genmult6price)
         
         genmulted6 *= 2;
+        localStorage.setItem('genmult6', genmulted6)
         
     } else {
         displayError();
     }
 });
+
 
 
 //event des generateurs
@@ -905,8 +950,65 @@ let alphachecker6 = setInterval(() => {
     alphacheck6()
 },localStorage.getItem('intermult6') / localStorage.getItem('gen6count') * 1000)
 
+// Systeme qu'il reste une fois débloqué //
+function genstayed(){
+    setInterval(() => {
+if (genshouldstay){
+    genshop.style.opacity = '1'
+    }
+if (upgradeshouldstay){
+    shop.style.opacity = '1'
+    }
 
+if (gen1shouldstay){
+        gen1.style.opacity = '1';
+        gen1.style.display = 'block';
+}else{
+    gen1.style.opacity = '0';
+    gen1.style.display = 'none';
+}
 
+if (gen2shouldstay){
+        gen2.style.opacity = '1';
+        gen2.style.display = 'block';
+}else{
+    gen2.style.opacity = '0';
+    gen2.style.display = 'none';
+}
+
+if (gen3shouldstay){
+        gen3.style.opacity = '1';
+        gen3.style.display = 'block';
+}else{
+    gen3.style.opacity = '0';
+    gen3.style.display = 'none';
+}
+
+if (gen4shouldstay){
+        gen4.style.opacity = '1';
+        gen4.style.display = 'block';
+    }else{
+    gen4.style.opacity = '0';
+    gen4.style.display = 'none';
+}
+
+if (gen5shouldstay){
+        gen5.style.opacity = '1';
+        gen5.style.display = 'block';
+}else{
+    gen5.style.opacity = '0';
+    gen5.style.display = 'none';
+}
+
+if (gen6shouldstay){
+        gen6.style.opacity = '1';
+        gen6.style.display = 'block';
+}else{
+    gen6.style.opacity = '0';
+    gen6.style.display = 'none';
+}
+},1)
+}
 
 
 
@@ -989,4 +1091,4 @@ psiSwitch.addEventListener('click', () => {
     // Supprimer les autres classes et ajouter la classe alpha
     alpha.classList.remove('gamma', 'beta', 'alpha', 'delta', 'epsilon');
     alpha.classList.add('psi');
-});
+})
