@@ -144,7 +144,7 @@ let priceGen6 = localStorage.getItem('gen6price') ? localStorage.getItem('gen6pr
 // let genmult5price = 10000000000
 // let genmult6price = 100000000000
 // let clickmultprice = 10000000
-let genmult1price = localStorage.getItem('genmult1price') ? localStorage.getItem('genmult1price') : 50000000
+let genmult1price = localStorage.getItem('genmult1price') ? localStorage.getItem('genmult1price') : 5
 let genmult2price = localStorage.getItem('genmult2price') ? localStorage.getItem('genmult2price') : 750000000
 let genmult3price = localStorage.getItem('genmult3price') ? localStorage.getItem('genmult3price') : 1000000000
 let genmult4price = localStorage.getItem('genmult4price') ? localStorage.getItem('genmult4price') : 1500000000
@@ -174,37 +174,55 @@ const shopmobile = document.querySelector('.gameshop')
 const elementmobile = document.querySelector('.elementsmobile')
 const filter = document.querySelector('.filter')
 const mobiletuto = document.querySelector('.mobile_tuto')
+const mobiletuto2 = document.querySelector('.mobile_tuto_2')
+const mobiletutostatus = localStorage.getItem('mobiletuto') ?  localStorage.getItem('mobiletuto') : false
+const mobiletutostatus2 = localStorage.getItem('mobiletuto2') ?  localStorage.getItem('mobiletuto2') : false
 
 genmobile.addEventListener('click', (e) => {
     if(!genmobile.classList.contains('click'))
-        {genshop.style.display = 'grid',geninfo.style.display = 'grid', filter.style.opacity = '1', shop.style.display = 'none',  headswitches.style.display = 'none'}
-
-        if(count < priceGen1){
-            mobiletuto.style.display = 'flex'
-            mobiletuto.textContent = `Get ${formatNumber(priceGen1)} ${unit} to unlock your first generator`
-        }else{mobiletuto.style.display = 'none' }
-    })
+        {genshop.style.display = 'grid',geninfo.style.display = 'grid', filter.style.opacity = '1', shop.style.display = 'none',  headswitches.style.display = 'none', mobiletuto.style.display = 'none'}
     
+    
+    
+    if(count >= priceGen1){mobiletutostatus2 = true
+        localStorage.setItem('mobiletuto2')}
+        mobiletuto2.style.display = 'none'
+        
+        if(count < priceGen1){
+            mobiletuto2.style.display = 'flex'
+            mobiletuto2.textContent = `Get ${formatNumber(priceGen1)} ${unit} to unlock your first generator`
+            }
+            if(mobiletutostatus2){mobiletuto2.style.display = 'none'}
+            })
+            
 shopmobile.addEventListener('click', (e) => {
-    if(!shopmobile.classList.contains('click'))
-        {genshop.style.display = 'none',geninfo.style.display = 'none', filter.style.opacity = '1', shop.style.display = 'grid',  headswitches.style.display = 'none'}
+        if(!shopmobile.classList.contains('click'))
+            {genshop.style.display = 'none',geninfo.style.display = 'none', filter.style.opacity = '1', shop.style.display = 'grid',  headswitches.style.display = 'none', mobiletuto2.style.display = 'none'}
+                
+                
+
+    if(count >= genmult1price){
+                mobiletutostatus = true
+        localStorage.setItem('mobiletuto')
+    }
 
     if(count < genmult1price){
+
         mobiletuto.style.display = 'flex'
         mobiletuto.textContent = `Get ${formatNumber(genmult1price)} ${unit} to unlock your first upgrade`
-    }else{mobiletuto.style.display = 'none'}
+    }if (mobiletutostatus){mobiletuto.style.display = 'none'}
 }
 )
 
     
     elementmobile.addEventListener('click', (e) => {
         if(!elementmobile.classList.contains('click'))
-            {genshop.style.display = 'none', geninfo.style.display = 'none', filter.style.opacity = '1', shop.style.display = 'none',  headswitches.style.display = 'grid', mobiletuto.style.display = 'none'}
+            {genshop.style.display = 'none', geninfo.style.display = 'none', filter.style.opacity = '1', shop.style.display = 'none',  headswitches.style.display = 'grid', mobiletuto.style.display = 'none',mobiletuto2.style.display = 'none'}
     })
 
     gamemobile.addEventListener('click', (e) => {
         if(!gamemobile.classList.contains('click'))
-    {genshop.style.display = 'none', geninfo.style.display = 'none', filter.style.opacity = '0', shop.style.display = 'none',  headswitches.style.display = 'none', mobiletuto.style.display = 'none'}})
+    {genshop.style.display = 'none', geninfo.style.display = 'none', filter.style.opacity = '0', shop.style.display = 'none',  headswitches.style.display = 'none',  mobiletuto.style.display = 'none',mobiletuto2.style.display = 'none'}})
 
     
 function mobilemode(x) {
